@@ -18,6 +18,10 @@
                 "jsx": "never",
                 "ts": "never",
                 "tsx": "never"
+            },
+            {
+                "semicolon": "always",
+                "quotes": "double"
             }
         ]
     },
