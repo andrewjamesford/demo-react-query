@@ -5,21 +5,22 @@ import { getPokemon } from "../api";
 const PokemonDetails = () => {
   const { id } = useParams({ strict: false });
 
-  const query = useQuery({
+  const { isLoading, isError, data } = useQuery({
     queryKey: ["pokemon", id],
     queryFn: () => getPokemon(id),
+    staleTime: 1000 * 60 * 5, // 5 minutes
   });
 
-  query.isLoading && <div>Loading</div>;
-  query.isError && <div>Error</div>;
+  isLoading && <div>Loading</div>;
+  isError && <div>Error</div>;
 
-  query.data && console.log(query.data);
+  data && console.log(data);
   return (
     <>
       <div>
-        <h1>{query.data?.name}</h1>
-        {query.data?.sprites && (
-          <img src={query.data.sprites.front_default} alt={query.data.name} />
+        <h1>{data?.name}</h1>
+        {data?.sprites && (
+          <img src={data.sprites.front_default} alt={data.name} />
         )}
       </div>
     </>

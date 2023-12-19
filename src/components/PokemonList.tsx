@@ -5,16 +5,16 @@ import { Link } from "@tanstack/react-router";
 
 const PokemonList = () => {
   // Queries
-  const query = useQuery({ queryKey: ["pokemons"], queryFn: getPokemons });
+  const { isLoading, isError, data } = useQuery({ queryKey: ["pokemons"], queryFn: getPokemons, staleTime: 1000 * 60 * 5,});
 
-  query.isLoading && <div>Loading</div>;
-  query.isError && <div>Error</div>;
+  isLoading && <div>Loading</div>;
+  isError && <div>Error</div>;
 
-  query.data && console.log(query.data);
+  data && console.log(data);
   return (
     <div>
       <ul>
-        {query.data?.results.map((pokemon: any) => (
+        {data?.results.map((pokemon: any) => (
           <li key={pokemon.name}>
             <Link
               to="/details/$id"
