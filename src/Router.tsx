@@ -13,7 +13,7 @@ const rootRoute = new RootRoute({
   component: () => (
     <>
       <Outlet />
-      <TanStackRouterDevtools />
+      <TanStackRouterDevtools initialIsOpen={false} />
     </>
   ),
 });
